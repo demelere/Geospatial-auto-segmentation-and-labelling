@@ -27,3 +27,26 @@ with rasterio.open(filename) as src:
     profile = src.profile
     bounds = src.bounds
     transform = src.transform
+
+##################################################
+# Segment the image using SAM model ##############
+
+model = SegmentAnything()
+segmentation = model.predict(data)
+
+##################################################
+# Convert results to GeoDataFrame and save file ##
+
+polygons = []
+for i, seg in enumerate(segmentation):
+    polygon = Polygon(rasterio.features.shapes(seg, transform=transform)[0][1])
+    polygons.append(polygon)
+gdf = gpd.GeoDataFrame({'geometry': polygons})
+gdf.to_file('segmentation_results.gpkg', driver='GPKG')
+
+##################################################
+# Use GroundingDino to label the result polygons #
+
+dino = GroundingDino()
+labels = dino.label('segmentation_results.gpkg')
+
