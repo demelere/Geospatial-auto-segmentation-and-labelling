@@ -1,0 +1,6 @@
+rasterio
+numpy
+geopandas
+shapely
+dino
+segment-anything
