@@ -1,5 +1,5 @@
 ### Intro
-This is a pipeline that uses Python and the Segment Anything (SAM) and Grounding DINO models to automatically segment and label satellite image data from Umbra's synthetic aperture radar (SAR) open dataset
+This is a pipeline that uses Python and the Segment Anything (SAM) and Grounding DINO models to automatically segment and label satellite image data from Umbra's synthetic aperture radar (SAR) open dataset.  The goal is a multi-modal application of SOTA transformer models (Segment Anything for segmentation, Grounding DINO for bounding box and label generation) to SAR satellite imagery.  
 
 ### Running the project
 * Run `docker build -t auto-segment-label-satellite-images .` to build the Docker image
